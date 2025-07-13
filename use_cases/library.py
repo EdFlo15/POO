@@ -1,3 +1,15 @@
+# Design a small system using OOP that manages books in a library. Your system should be able to:
+# 	1.	Add new books to the library.
+# 	2.	Borrow a book (mark it as borrowed).
+# 	3.	Return a book (mark it as available again).
+# 	4.	List all available books.
+
+# Requirements:
+# 	•	Each book must have at least a title, an author, and a status (available/borrowed).
+# 	•	You must use at least two classes.
+# 	•	Apply the principles of encapsulation and responsibility delegation.
+
+
 class Library:
 
     def __init__(self) -> None:
@@ -12,33 +24,33 @@ class Library:
         available_books = [book for book in self.list_books if not book.is_borrowed]
 
         for book in available_books:
-            print(f"The book '{book.title}' with author '{book.author}' has this status: '{book.is_borrowed}'")
+            print(f"The book '{book.title}' with author '{book.author}' borrowed status: '{book.is_borrowed}'")
 
     def list_all_books(self):
         
         for book in self.list_books:
-            print(f" we have this book {book.title} in this library wrtitten by {book.author} and it's availability is {book.is_borrowed}")
+            print(f" we have this book {book.title} in this library wrtitten by {book.author} borrowed status: {book.is_borrowed}")
 
-    def get_book(self, name):
+    def get_book(self, title):
 
-        for books_name in self.list_books:
-            if name in books_name.title:
-                print(f"the boook {books_name.title} author {books_name.author} {books_name.is_borrowed}")
+        for book in self.list_books:
+            if book.title == title:
+                print(f"the boook {book.title} author {book.author} now the borrowed status is: {book.is_borrowed}")
 
     def borrow_book(self, title):
 
         for book in self.list_books:
 
-            if title in book.title:
+            if book.title == title:
                 book.borrow_book()
-                print(f"The book {book.title} was borrowed")
+                print(f"The book {book.title} was borrowed now has this borrowed status: {book.is_borrowed}")
 
     def return_book(self, title):
 
         for book in self.list_books:
-            if title in book.title:
+            if book.title == title:
                 book.return_book()
-                print(f"the book {book.title} was returned correctly")
+                print(f"the book {book.title} was returned correctly now the borrow status is:  {book.is_borrowed}")
             
 
 class Book:
@@ -77,11 +89,19 @@ if __name__ == "__main__":
     libreria_principal.add_book(book2)
     
     
+    print(f"{'*'*10} initial status")
     libreria_principal.list_available_books()
 
     libreria_principal.borrow_book('one hundred of solitude')
 
+    print(f"{'*'*10} after borrow one hundred of solitude")
+
     libreria_principal.list_available_books()
+    print(f"{'*'*10} after return the book")
+
+    libreria_principal.return_book('one hundred of solitude')
+
+    print(f"{'*'*10} status all books")
 
     libreria_principal.list_all_books()
 
