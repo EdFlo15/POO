@@ -19,6 +19,9 @@ class Item:
         self.name = name
         self.price = price
         self.quantity = quantity
+
+    def total_price(self):
+        return self.price*self.quantity
     
 
 class Cart:
@@ -46,7 +49,7 @@ class Cart:
     def total_price(self):
         total =0
         for item in self.list_items:
-            total += item.price*item.quantity
+            total += item.total_price()
         return total
             
 
